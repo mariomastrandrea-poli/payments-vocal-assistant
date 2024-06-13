@@ -18,7 +18,18 @@ final class IntentAndEntitiesExtractorTests: XCTestCase {
         self.originalLogFlagValue = GlobalConfig.enableLogs
         GlobalConfig.enableLogs = false
         
-        let vocalAssistant = await PaymentsVocalAssistant.instance(appContext: AppContext(userContacts: [AppDelegateStub.antonioRossiContact, AppDelegateStub.giuseppeVerdiContact], userBankAccounts: [AppDelegateStub.futureBankAccount, AppDelegateStub.topBankAccount]))
+        let vocalAssistant = await PaymentsVocalAssistant.instance(
+            appContext: AppContext(
+                userContacts: [
+                    AppDelegateStub.antonioRossiContact,
+                    AppDelegateStub.giuseppeVerdiContact
+                ],
+                userBankAccounts: [
+                    AppDelegateStub.futureBankAccount,
+                    AppDelegateStub.topBankAccount
+                ]
+            )
+        )
         XCTAssertNotNil(vocalAssistant, "Failed to initialize PaymentsVocalAssistant")
         self.vocalAssistant = vocalAssistant!
     }
