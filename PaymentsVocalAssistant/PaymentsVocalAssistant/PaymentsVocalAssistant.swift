@@ -12,6 +12,8 @@ public enum AssistantModelType {
 }
 
 public class PaymentsVocalAssistant {
+    private static let testMode = false
+    
     // singleton instance
     private static var _instance: PaymentsVocalAssistant? = nil
     private static let type: AssistantModelType = .bert
@@ -41,7 +43,10 @@ public class PaymentsVocalAssistant {
             }
         
         // initialize speech recognizer, eventually with a Custom Language model (iOS >=17)
-        guard let speechRecognizer = await SpeechRecognizer() else { return nil }
+        guard let speechRecognizer = await SpeechRecognizer(
+            testMode: PaymentsVocalAssistant.testMode
+        ) else { return nil }
+        
         self.speechRecognizer = speechRecognizer
         
         await self.speechRecognizer.createCustomLM(

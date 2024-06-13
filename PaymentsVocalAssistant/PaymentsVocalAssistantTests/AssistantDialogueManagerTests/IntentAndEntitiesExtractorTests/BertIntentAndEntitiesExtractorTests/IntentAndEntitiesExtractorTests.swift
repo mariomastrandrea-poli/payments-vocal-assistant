@@ -29,7 +29,7 @@ final class IntentAndEntitiesExtractorTests: XCTestCase {
     }
     
     private func createExtractedIntentAndEntitiesTest(for sample: ExtractorSample) {
-        let dialogueManager = self.vocalAssistant.newConversation(withMessage: "", andDefaultErrorMessage: "", appDelegate: AppDelegateStub())
+        let dialogueManager = self.vocalAssistant.newConversation(withMessage: "", andDefaultErrorMessage: "", maxNumOfLastTransactions: 5, appDelegate: AppDelegateStub())
 
         let intentAndEntitiesExtractor = dialogueManager.dst.intentAndEntitiesExtractor
         let recognitionOutput = intentAndEntitiesExtractor.recognize(from: sample.text)
@@ -46,7 +46,7 @@ final class IntentAndEntitiesExtractorTests: XCTestCase {
     
     func testEntities() throws {
         let sample = ExampleText._3
-        let conversationManager = self.vocalAssistant.newConversation(withMessage: "", andDefaultErrorMessage: "", appDelegate: AppDelegateStub())
+        let conversationManager = self.vocalAssistant.newConversation(withMessage: "", andDefaultErrorMessage: "", maxNumOfLastTransactions: 5, appDelegate: AppDelegateStub())
 
         let intentAndEntitiesExtractor = conversationManager.dst.intentAndEntitiesExtractor
         let recognitionOutput = intentAndEntitiesExtractor.recognize(from: sample.text)

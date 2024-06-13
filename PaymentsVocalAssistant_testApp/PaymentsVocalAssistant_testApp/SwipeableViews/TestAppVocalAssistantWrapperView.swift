@@ -120,7 +120,10 @@ struct TestAppVocalAssistantWrapperView: View {
             }
         }
     }
-    
+}
+
+// - MARK: ContactStore
+extension TestAppVocalAssistantWrapperView {
     private func fetchContacts() async -> [VocalAssistantContact]? {
         _ = await self.contactStore.askPermissionToAccessContacts()
         

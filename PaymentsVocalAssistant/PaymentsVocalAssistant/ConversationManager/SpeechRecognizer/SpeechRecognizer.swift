@@ -50,8 +50,10 @@ class SpeechRecognizer {
      Initializes a new speech recognizer. If this is the first time you've used the class, it
      requests access to the speech recognizer and the microphone.
      */
-    init?() async {
+    init?(testMode: Bool = false) async {
         self.recognizer = SFSpeechRecognizer(locale: Locale(identifier: SpeechConfig.defaultLocaleId))
+        
+        if testMode { return }  // skip checks and user's permissions requests in test mode
         
         guard let recognizer = recognizer, recognizer.isAvailable else {
             transcribe(SpeechRecognizerError.nilRecognizer)
@@ -68,7 +70,7 @@ class SpeechRecognizer {
         }
         
         // check user's permissions for recording and for speech recognizer (STT)
-        
+                
         do {
             guard await SFSpeechRecognizer.hasAuthorizationToRecognize() else {
                 throw SpeechRecognizerError.notAuthorizedToRecognize
@@ -194,7 +196,7 @@ class SpeechRecognizer {
      Begin transcribing audio.
      
      Creates a `SFSpeechRecognitionTask` that transcribes speech to text until you call `stopTranscribing()`.
-     The resulting transcription is continuously written to the published `transcript` property.
+     The resulting transcription is continuously written to the `transcript` property.
      */
     private func transcribe() {
         guard let recognizer else {

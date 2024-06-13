@@ -80,4 +80,3 @@ class SpeechSynthesizer {
         self.speechSynthesizer.speak(utterance)
     }
 }
-
